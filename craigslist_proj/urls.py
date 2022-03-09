@@ -37,19 +37,19 @@ urlpatterns = [
     url(r'^city/(?P<city>\d+)/$', CityListView.as_view(), name='city_list_view'),
     url(r'^city/(?P<citypk>\d+)/(?P<categorypk>\d+)/$', CityCategoryListView.as_view(), name='city_category_list_view'),
     # Start API urls
-    url(r'^api/api-token-auth/', views.obtain_auth_token),
-    url(r'^api/register/$', UserCreateAPIView.as_view(), name='create_user_view'),
-    url(r'^api/listings/$', ListingListCreateAPIView.as_view(), name='listing-list'),
-    url(r'^api/listings/(?P<pk>\d+)/$', ListingRetrieveUpdateAPIView.as_view(), name='listing-detail'),
+#    url(r'^api/api-token-auth/', views.obtain_auth_token),
+#    url(r'^api/register/$', UserCreateAPIView.as_view(), name='create_user_view'),
+#    url(r'^api/listings/$', ListingListCreateAPIView.as_view(), name='listing-list'),
+#    url(r'^api/listings/(?P<pk>\d+)/$', ListingRetrieveUpdateAPIView.as_view(), name='listing-detail'),
 
-    url(r'^api/categories/$', CategoryListCreateAPIView.as_view(), name='categories-list'),
-    url(r'^api/categories/(?P<pk>\d+)/$', CategoryRetriveUpdateAPIView.as_view(), name='categories-detail'),
+#    url(r'^api/categories/$', CategoryListCreateAPIView.as_view(), name='categories-list'),
+#    url(r'^api/categories/(?P<pk>\d+)/$', CategoryRetriveUpdateAPIView.as_view(), name='categories-detail'),
 
-    url(r'^api/sub_categories/$', SubCategoryListCreateAPIView.as_view(), name='sub-categories-list'),
-    url(r'^api/sub_categories/(?P<pk>\d+)/$', SubCategoryRetriveUpdateAPIView.as_view(), name='sub-categories-detail'),
+#    url(r'^api/sub_categories/$', SubCategoryListCreateAPIView.as_view(), name='sub-categories-list'),
+#    url(r'^api/sub_categories/(?P<pk>\d+)/$', SubCategoryRetriveUpdateAPIView.as_view(), name='sub-categories-detail'),
 
-    url(r'^api/category_listings/(?P<pk>\d+)/$', CategoryListingListAPIView.as_view(), name='category-listings-list'),
-    url(r'^api/sub_category_listings/(?P<pk>\d+)/$', SubCategoryListingListAPIView.as_view(), name='sub-category-listings-list'),
-    url(r'^api/docs/', include('rest_framework_docs.urls')),
+#    url(r'^api/category_listings/(?P<pk>\d+)/$', CategoryListingListAPIView.as_view(), name='category-listings-list'),
+#    url(r'^api/sub_category_listings/(?P<pk>\d+)/$', SubCategoryListingListAPIView.as_view(), name='sub-category-listings-list'),
+#    url(r'^api/docs/', include('rest_framework_docs.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -13,8 +13,8 @@ class City(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField('auth.User')
-    profile_city = models.ForeignKey(City, verbose_name='Preferred City', null=True)
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+    profile_city = models.ForeignKey(City, verbose_name='Preferred City', null=True, on_delete=models.CASCADE)
     preferred_contact = models.CharField(max_length=30, null=True)
 
     def __str__(self):
@@ -23,16 +23,16 @@ class Profile(models.Model):
 
 class ListingType(models.Model):
     name = models.CharField(max_length=20)
-    parent = models.ForeignKey("self", null=True, blank=True, related_name='subcat')
+    parent = models.ForeignKey("self", null=True, blank=True, related_name='subcat', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
 
 class Listing(models.Model):
-    user = models.ForeignKey('auth.User')
-    listing_city = models.ForeignKey(City)
-    category = models.ForeignKey(ListingType)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    listing_city = models.ForeignKey(City, on_delete=models.CASCADE)
+    category = models.ForeignKey(ListingType, on_delete=models.CASCADE)
     title = models.CharField(max_length=40)
     price = models.IntegerField()
     description = models.TextField()

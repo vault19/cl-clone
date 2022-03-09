@@ -9,7 +9,7 @@ from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.urlresolvers import reverse_lazy, reverse
+from django.urls import reverse, reverse_lazy
 
 
 class IndexView(ListView):
@@ -23,7 +23,7 @@ class IndexView(ListView):
         context = super().get_context_data(**kwargs)
         context['cities'] = City.objects.all()
 
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             context["profile"] = Profile.objects.get(user=self.request.user)
         else:
             context["login_form"] = AuthenticationForm()
@@ -93,7 +93,7 @@ class CityListView(ListView):
         context['city'] = City.objects.get(id=city_id)
         context['cities'] = City.objects.all()
 
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             context["profile"] = Profile.objects.get(user=self.request.user)
         else:
             context["login_form"] = AuthenticationForm()
@@ -128,7 +128,7 @@ class ListingDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             context['profile'] = Profile.objects.get(user=self.request.user)
         return context
 

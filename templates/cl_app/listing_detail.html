@@ -29,7 +29,7 @@
     <div>
         <p class="postinfo">post id: {{ object.id }}</p> <p class="postinfo">posted: <span class="timel">{{ object.created }}</span></p>
     </div>
-    {% if object.user = request.user %}
+    {% if object.user == request.user %}
         <a href="{% url 'listing_update_view' object.id %}">Update Your Listing</a>
         <br>
         <a href="{% url 'listing_delete_view' object.pk %}">Delete</a>
