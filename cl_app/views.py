@@ -10,6 +10,8 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
+from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 
 class IndexView(ListView):
@@ -22,6 +24,7 @@ class IndexView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cities'] = City.objects.all()
+        context['TITLE'] = settings.TITLE
 
         if self.request.user.is_authenticated:
             context["profile"] = Profile.objects.get(user=self.request.user)
@@ -90,6 +93,8 @@ class CityListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         city_id = self.kwargs.get('city')
+        context['TITLE'] = settings.TITLE
+        context['CURRENCY'] = settings.CURRENCY
         context['city'] = City.objects.get(id=city_id)
         context['cities'] = City.objects.all()
 
@@ -120,6 +125,8 @@ class CityCategoryListView(ListView):
         context['category'] = ListingType.objects.get(id=category_id)
         context['category_id'] = category_id
         context['city_id'] = city_id
+        context['TITLE'] = settings.TITLE
+        context['CURRENCY'] = settings.CURRENCY
         return context
 
 
@@ -130,6 +137,10 @@ class ListingDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             context['profile'] = Profile.objects.get(user=self.request.user)
+
+        context['TITLE'] = settings.TITLE
+        context['CURRENCY'] = settings.CURRENCY
+
         return context
 
 
@@ -145,6 +156,8 @@ class CategoryListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['TITLE'] = settings.TITLE
+        context['CURRENCY'] = settings.CURRENCY
         context['category_id'] = self.kwargs.get('categorypk')
         return context
 
@@ -159,6 +172,8 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['TITLE'] = settings.TITLE
+        context['CURRENCY'] = settings.CURRENCY
         context['user_listings'] = Listing.objects.filter(user=self.request.user)
         return context
 
@@ -180,5 +195,7 @@ class SearchListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['search'] = "search"
+        context['search'] = _("search")
+        context['TITLE'] = settings.TITLE
+        context['CURRENCY'] = settings.CURRENCY
         return context

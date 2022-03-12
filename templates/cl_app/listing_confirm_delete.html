@@ -1,16 +1,17 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block body %}
 
-<h1 class="text-center">Do you really want to delete?</h1>
+<h1 class="text-center">{% translate "Do you really want to delete?" %}</h1>
     <div class="container">
         <div class="text-center">
-            <h3>Are you sure?</h3>
-            <p>You're about to delete <strong>{{ object }}</strong>. <br>Please confirm.</p>
+            <h3>{% translate "Are you sure?" %}</h3>
+            <p>{% translate "You're about to delete <strong>%s</strong>." % object %} <br>{% translate "Please confirm." %}</p>
             <form action="" method="post">
                 {% csrf_token %}
-                <input class="btn btn-link" type="button" value="Cancel" onclick="window.history.go(-1);"/>
-                <input class="btn btn-danger" type="submit" value="Confirm"/>
+                <input class="btn btn-link" type="button" value="{% translate "Cancel" %}" onclick="window.history.go(-1);"/>
+                <input class="btn btn-danger" type="submit" value="{% translate "Confirm" %}"/>
             </form>
         </div>
     </div>

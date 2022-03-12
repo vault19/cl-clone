@@ -2,11 +2,14 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
+from django.utils.translation import ugettext_lazy as _
 
 
 # Create your models here.
 class City(models.Model):
     city = models.CharField(max_length=20)
+    description = models.TextField(blank=True, null=True)
+    metadata = models.JSONField(verbose_name=_("Metadata"), blank=True, null=True, help_text=_("Metadata about city."))
 
     def __str__(self):
         return self.city
@@ -14,8 +17,10 @@ class City(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
-    profile_city = models.ForeignKey(City, verbose_name='Preferred City', null=True, on_delete=models.CASCADE)
-    preferred_contact = models.CharField(max_length=30, null=True)
+    profile_city = models.ForeignKey(City, verbose_name=_('Preferred City'), null=True, on_delete=models.CASCADE)
+    preferred_contact = models.CharField(max_length=30, null=True, verbose_name=_('Preferred Contact'))
+    metadata = models.JSONField(verbose_name=_("Metadata"), blank=True, null=True,
+                                help_text=_("Metadata about profile."))
 
     def __str__(self):
         return str(self.user)
@@ -36,8 +41,11 @@ class Listing(models.Model):
     title = models.CharField(max_length=40)
     price = models.IntegerField()
     description = models.TextField()
-    photo = models.ImageField(upload_to="listing_photos", null=True, blank=True, verbose_name="Listing Photo")
+    photo = models.ImageField(upload_to="listing_photos", null=True, blank=True, verbose_name=_("Listing Photo"))
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    metadata = models.JSONField(verbose_name=_("Metadata"), blank=True, null=True,
+                                help_text=_("Metadata about listing."))
 
     def __str__(self):
         return self.title

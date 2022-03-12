@@ -112,14 +112,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'sk'
-LANGUAGES = (
-    ('en', _('English')),
-    ('sk', _('Slovak')),
-    ('ua', _('Ukrainian')),
-)
+LANGUAGE_CODE = "sk"
+LANGUAGES = [("en", "English"), ("sk", "Slovenčina"), ('ua', 'український')]
 
-TIME_ZONE = 'Europe/Bratislava'
+LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
+
+TIME_ZONE = "Europe/Bratislava"
 
 USE_I18N = True
 
@@ -156,6 +154,8 @@ REST_FRAMEWORK_DOCS = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
+TITLE = 'xxx'
+CURRENCY = '€'
 
 # import dj_database_url
 # db_from_env = dj_database_url.config()
