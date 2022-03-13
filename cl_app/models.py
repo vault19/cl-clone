@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -7,7 +9,8 @@ from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 class City(models.Model):
-    city = models.CharField(max_length=20)
+    city = models.CharField(max_length=50)
+    slug = models.SlugField(verbose_name=_("Slug"), unique=True)
     description = models.TextField(blank=True, null=True)
     metadata = models.JSONField(verbose_name=_("Metadata"), blank=True, null=True, help_text=_("Metadata about city."))
 
@@ -28,6 +31,7 @@ class Profile(models.Model):
 
 class ListingType(models.Model):
     name = models.CharField(max_length=20)
+    slug = models.SlugField(verbose_name=_("Slug"), unique=True)
     parent = models.ForeignKey("self", null=True, blank=True, related_name='subcat', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -35,6 +39,7 @@ class ListingType(models.Model):
 
 
 class Listing(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     listing_city = models.ForeignKey(City, on_delete=models.CASCADE)
     category = models.ForeignKey(ListingType, on_delete=models.CASCADE)
