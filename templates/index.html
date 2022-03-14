@@ -8,7 +8,7 @@
             <h2>{% translate "Hello" %} {{ request.user }},
                 {% if profile.profile_city %}
                 <br><small>{% translate "Would you like to go to your perfered city page?" %}
-                <a href="{% url 'city_list_view' profile.profile_city.pk %}">{{ profile.profile_city }}</a></small>
+                <a href="{% url 'city_list_view' profile.profile_city.slug %}">{{ profile.profile_city }}</a></small>
                 {% else %}
                 <br><small>{% translate "You do not have a saved perfered city, please update your profile." %}
                     <a class="btn btn-default" href="{% url 'profile_view' %}">{% translate "Update Profile" %}</a></small>
@@ -33,7 +33,7 @@
             <h3>{% translate "Pick a city to view listings." %}</h3>
             <div class="list-group">
                 {% for city in cities %}
-                <a href="{% url 'city_list_view' city.pk %}" class="list-group-item">{{ city }}</a>
+                <a href="{% url 'city_list_view' city.slug %}" class="list-group-item">{{ city }}</a>
                 {% endfor %}
             </div>
         </div>

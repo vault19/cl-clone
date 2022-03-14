@@ -47,8 +47,8 @@ class ListingCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         listing = form.save(commit=False)
         listing.user = self.request.user
-        category_id = self.kwargs.get('categorypk')
-        listing.category = ListingType.objects.get(id=category_id)
+        category_id = self.kwargs.get('category_slug')
+        listing.category = ListingType.objects.get(slug=category_id)
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -92,10 +92,10 @@ class CityListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        city_id = self.kwargs.get('city')
+        city_id = self.kwargs.get('city_slug')
         context['TITLE'] = settings.TITLE
         context['CURRENCY'] = settings.CURRENCY
-        context['city'] = City.objects.get(id=city_id)
+        context['city'] = City.objects.get(slug=city_id)
         context['cities'] = City.objects.all()
 
         if self.request.user.is_authenticated:
@@ -109,24 +109,25 @@ class CityCategoryListView(ListView):
     model = Listing
 
     def get_queryset(self, **kwargs):
-        city_id = self.kwargs.get('citypk')
-        category_id = self.kwargs.get('categorypk')
+        city_id = self.kwargs.get('city_slug')
+        category_id = self.kwargs.get('category_slug')
         sort = self.request.GET.get('sort')
         if sort:
-            return Listing.objects.filter(listing_city=city_id).filter(category=category_id).order_by(sort)
+            return Listing.objects.filter(listing_city__slug=city_id).filter(category__slug=category_id).order_by(sort)
         else:
-            return Listing.objects.filter(listing_city=city_id).filter(category=category_id)
+            return Listing.objects.filter(listing_city__slug=city_id).filter(category__slug=category_id)
 
     def get_context_data(self, **kwargs):
-        city_id = self.kwargs.get('citypk')
-        category_id = self.kwargs.get('categorypk')
+        city_id = self.kwargs.get('city_slug')
+        category_id = self.kwargs.get('category_slug')
         context = super().get_context_data(**kwargs)
-        context['city'] = City.objects.get(id=city_id)
-        context['category'] = ListingType.objects.get(id=category_id)
+        context['category'] = ListingType.objects.get(slug=category_id)
+        context['city'] = City.objects.get(slug=city_id)
         context['category_id'] = category_id
         context['city_id'] = city_id
         context['TITLE'] = settings.TITLE
         context['CURRENCY'] = settings.CURRENCY
+
         return context
 
 
