@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 from django.conf.urls import include
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from cl_app.views import IndexView, RegisterView, SearchListView, ListingUpdateView, ListingDeleteView, ListingTypeCreateView, ListingCreateView, ListingDetailView, ProfileView, CityListView, CategoryListView, CityCategoryListView
 from cl_api.views import ListingListCreateAPIView, ListingRetrieveUpdateAPIView, CategoryListCreateAPIView, CategoryRetriveUpdateAPIView, SubCategoryListCreateAPIView, SubCategoryRetriveUpdateAPIView, CategoryListingListAPIView, SubCategoryListingListAPIView, UserCreateAPIView
@@ -24,7 +25,6 @@ from rest_framework.authtoken import views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
     path('', IndexView.as_view(), name='index_view'),
     path('register/', RegisterView.as_view(), name='register_view'),
@@ -55,3 +55,6 @@ urlpatterns = [
 #    path('api/docs/', include('rest_framework_docs.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [path('i18n/', include('django.conf.urls.i18n')),]
+urlpatterns += i18n_patterns(path('admin/', admin.site.urls))
