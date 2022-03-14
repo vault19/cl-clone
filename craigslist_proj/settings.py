@@ -113,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
 LANGUAGE_CODE = "sk"
-LANGUAGES = [("en", "English"), ("sk", "Slovenčina"), ('ua', 'український')]
+LANGUAGES = [("en", "English"), ("sk", "Slovenčina"), ('uk', 'український')]
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
