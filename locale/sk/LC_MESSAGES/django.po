@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-13 00:17+0100\n"
+"POT-Creation-Date: 2022-03-14 21:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,35 +19,39 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n "
 ">= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 
-#: cl_app/models.py:12 cl_app/models.py:22 cl_app/models.py:47
+#: cl_app/models.py:13 cl_app/models.py:34
+msgid "Slug"
+msgstr ""
+
+#: cl_app/models.py:15 cl_app/models.py:25 cl_app/models.py:52
 msgid "Metadata"
 msgstr ""
 
-#: cl_app/models.py:12
+#: cl_app/models.py:15
 msgid "Metadata about city."
 msgstr ""
 
-#: cl_app/models.py:20
+#: cl_app/models.py:23
 msgid "Preferred City"
 msgstr ""
 
-#: cl_app/models.py:21
+#: cl_app/models.py:24
 msgid "Preferred Contact"
 msgstr ""
 
-#: cl_app/models.py:23
+#: cl_app/models.py:26
 msgid "Metadata about profile."
 msgstr ""
 
-#: cl_app/models.py:44
+#: cl_app/models.py:49
 msgid "Listing Photo"
 msgstr ""
 
-#: cl_app/models.py:48
+#: cl_app/models.py:53
 msgid "Metadata about listing."
 msgstr ""
 
-#: cl_app/views.py:198
+#: cl_app/views.py:199
 msgid "search"
 msgstr ""
 
@@ -1244,6 +1248,10 @@ msgstr ""
 msgid "Connect, get help, or contribute"
 msgstr ""
 
+#: envs3/lib/python3.9/site-packages/modeltranslation/widgets.py:26
+msgid "None"
+msgstr ""
+
 #: templates/base.html:7
 msgid "Catalog of things."
 msgstr ""
@@ -1273,11 +1281,11 @@ msgstr ""
 msgid "Search for..."
 msgstr ""
 
-#: templates/base.html:28
-msgid "Go!"
+#: templates/base.html:28 templates/base.html:44
+msgid "Go"
 msgstr ""
 
-#: templates/base.html:46
+#: templates/base.html:60
 msgid "Made by Vault19 o.z."
 msgstr ""
 

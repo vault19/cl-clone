@@ -34,7 +34,13 @@
     <p>{{ object.description }}</p>
     <br>
     <p> {% translate "Price" %}: {{ object.price }}{{ CURRENCY }}</p>
-    <p> {% translate "Contact" %}: {{ object.user.profile.preferred_contact }}</p>
+    <p>
+    {% if request.user.is_authenticated %}
+      {% translate "Contact" %}: {{ object.user.profile.preferred_contact }}
+    {% else %}
+      {% translate "Please login to see the contact." %}
+    {% endif %}
+    </p>
     <br>
     <div>
       {% if DEBUG %}<p class="postinfo">{% translate "Post ID:" %} {{ object.id }}</p>{% endif %}

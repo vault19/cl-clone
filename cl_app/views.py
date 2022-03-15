@@ -15,13 +15,14 @@ from django.conf import settings
 
 
 class IndexView(ListView):
-    template_name = "index.html"
-    model = ListingType
+    template_name = "landing_page.html"
+    model = Listing
 
     def get_queryset(self):
-        return ListingType.objects.filter(parent=None)
+        return Listing.objects.order_by('category').order_by('listing_city').all
 
     def get_context_data(self, **kwargs):
+        print('aaa')
         context = super().get_context_data(**kwargs)
         context['cities'] = City.objects.all()
         context['TITLE'] = settings.TITLE
